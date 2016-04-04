@@ -44849,6 +44849,7 @@ React = require('react');
 var App = React.createClass({displayName: "App",
   getInitialState: function () {
     var state = {};
+    console.log(this.props);
     state.appName = this.props.params.appName;
     return state;
   },
@@ -44859,20 +44860,44 @@ var App = React.createClass({displayName: "App",
     switch(self.state.appName){
       case "website":
       console.log('website');
+      self.setState({
+        appDesc: "Official website for 3z.com",
+        appImgSrc: "/images/app-website/"
+      });
       break;
       case "dotability":
       console.log('dotability');
+      self.setState({
+        appDesc: "Mobile app that allow dota 2 player retrieve their profile and match histories.",
+        appImgSrc: "/images/app-dotability/"
+      });
       break;
       default:break;
     }
   },
 
   render: function() {
+    var self = this;
     return (
       React.createElement("div", {style: {
         padding: '20px'
       }}, 
-        React.createElement("h1", null, "User id: ")
+        React.createElement("h2", null, self.state.appName), 
+        React.createElement("div", null, self.state.appDesc), 
+
+        React.createElement("div", {style: {marginTop: "10px"}}, 
+          React.createElement("img", {
+          src: self.state.appImgSrc + "1.png", 
+          style: {
+            width: "100%"
+          }}), 
+
+          React.createElement("img", {
+          src: self.state.appImgSrc + "2.png", 
+          style: {
+            width: "100%"
+          }})
+        )
       )
     );
   }
